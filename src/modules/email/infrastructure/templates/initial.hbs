@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview and Update Residence</title>
+    <!--[if !mso]><!-->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!--<![endif]-->
+    <style type="text/css">
+        /* Import Playfair Display font for email clients that support it */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        
+        /* Fallback font stack */
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 400;
+            src: local('Playfair Display Regular'), local('PlayfairDisplay-Regular'), url(https://fonts.gstatic.com/s/playfairdisplay/v21/nuFiD-vYSZviVYUb_rj3ij__anPXDTzYgEM86xQ.woff2) format('woff2');
+        }
+        
+        @font-face {
+            font-family: 'Playfair Display';
+            font-style: normal;
+            font-weight: 700;
+            src: local('Playfair Display Bold'), local('PlayfairDisplay-Bold'), url(https://fonts.gstatic.com/s/playfairdisplay/v21/nuFlD-vYSZviVYUb_rj3ij__anPXBYf9lW4e5j5hNKc.woff2) format('woff2');
+        }
+        
+        /* Basic reset */
+        body, p, h1, h2, h3, h4, h5, h6, table, td, div, a, span {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body, p, td, div, a, span {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif !important;
+            letter-spacing: -0.5px;
+            font-weight: 500;
+        }
+        /* Main styles */
+        body {
+            background-color: #f4f4f4;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #000;
+            position: relative;
+        }
+        
+        
+        .logo {
+            max-width: 180px;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        .content-wrapper {
+            padding: 40px;
+            background-color: #000;
+        }
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+            background-color: #F8F6F0;
+            width: 100%;
+            max-width: calc(100% - 120px);
+            margin: 0 auto;
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-bottom: 30px;
+            display: inline-block;
+        }
+        
+        .main-title {
+            font-size: 34px;
+            color: #000000;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        h2{
+            font-size: 24px;
+        }
+        
+        .welcome-text {
+            color: #666666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        
+        .features-container {
+            display: inline-block;
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .feature-box {
+            display: inline-block;
+            width: 90%;
+            vertical-align: top;
+            margin: 0 1.5%;
+            padding: 15px 0;
+            border: 1px solid rgba(198, 163, 99, 0.50);
+            border-radius: 5px;
+            background-color: #fff;
+            min-height: 160px;
+        }
+        
+        .feature-box svg {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 10px;
+            display: block;
+            color: #8b6d40;
+            margin-left: 10px;
+        }
+        
+        .feature-title {
+            font-size: 14px;
+            color: #666666;
+            padding: 0 10px;
+            line-height: 1.4;
+        }
+        
+        .no-login {
+            font-family: 'Playfair Display', Georgia, serif !important;
+            margin: 25px 0 15px;
+        }
+        
+        .link-instruction {
+            color: #666666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .cta-button {
+            display: block;
+            background-color: #c9a86b;
+            color: #ffffff !important;
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 20px auto;
+            max-width: 300px;
+            text-align: center;
+            border-radius: 3px;
+        }
+        
+        .divider {
+            height: 1px;
+            background-color: #e0e0e0;
+            margin: 30px 0;
+        }
+        
+        .closing-title {
+            font-family: 'Playfair Display', Georgia, serif !important;
+            margin-bottom: 20px;
+        }
+        
+        .closing-text {
+            color: #666666;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .signature {
+            color: #666666;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        
+        .footer {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .footer a {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+        
+        /* Responsive design for mobile */
+        @media only screen and (max-width: 600px) {
+            .feature-box {
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .content-wrapper {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#f4f4f4">
+        <tr>
+            <td align="center">
+                <table class="email-container" cellpadding="0" cellspacing="0" border="0" width="600">
+               
+                    <!-- Logo -->
+                    <tr>
+                        <td align="center">
+                            <div class="logo">
+                                <img src="
+                                    https://bestbrandedresidences.com/mail-logo.png" alt="Best Branded Residences" srcset="">
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <!-- Main Content -->
+                    <tr class="content-wrapper">
+                        <td class="content">
+                            <h1 class="main-title">We invite you to preview and update One &amp; Only Private Residence, Kéa Island published on our website</h1>
+                            
+                            <p class="welcome-text">Hi {{name}},<br><br>
+                            We're excited to announce that the Best Branded Residences (BBR) platform is almost ready to launch! Before we go live, we'd love for you to review your residence profile and ensure all the information is accurate and up-to-date.</p>
+                            
+                            <!-- Feature Boxes -->
+                            <div class="features-container">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                    <tr>
+                                        <td valign="top" width="33%">
+                                            <table class="feature-box" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                <tr>
+                                                    <td align="left">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37" fill="none">
+                                                            <path d="M3.09298 22.2933C3.09298 22.339 3.0625 22.4 3.0625 22.4457C4.4644 25.2495 6.75012 27.5505 9.55393 28.9371C9.59964 28.9371 9.66059 28.9067 9.70631 28.9067C9.18821 27.139 8.79202 25.3257 8.5025 23.5124C6.67393 23.2076 4.8606 22.8114 3.09298 22.2933Z" fill="#724C1F"/>
+                                                            <path d="M29.4695 22.8572C29.4695 22.9029 29.5 22.9638 29.5 23.0096C28.0981 25.8134 25.8124 28.1143 23.0086 29.501C22.9629 29.501 22.9019 29.4705 22.8562 29.4705C23.3743 27.7029 23.7705 25.8896 24.06 24.0762C25.8886 23.7715 27.7019 23.3753 29.4695 22.8572Z" fill="#724C1F"/>
+                                                            <path d="M29.0592 9.79808C27.6268 6.79618 25.204 4.37332 22.2173 2.95618C22.7659 4.76951 23.223 6.62856 23.5278 8.48761C25.3868 8.79237 27.2459 9.23427 29.0592 9.79808Z" fill="#724C1F"/>
+                                                            <path d="M2.94043 9.79812C4.769 9.24955 6.62805 8.79241 8.4871 8.48765C8.79186 6.67432 9.17281 4.87622 9.69091 3.1086C9.64519 3.1086 9.58424 3.07812 9.53853 3.07812C6.67376 4.49527 4.34233 6.88765 2.94043 9.79812Z" fill="#724C1F"/>
+                                                            <path d="M21.0585 8.16761C20.6928 6.18666 20.2357 4.20571 19.5804 2.28571C19.55 2.17904 19.55 2.08761 19.5347 1.96571C18.4071 1.69142 17.2185 1.5238 15.9995 1.5238C14.7652 1.5238 13.5919 1.69142 12.449 1.98095C12.4338 2.08761 12.449 2.17904 12.4185 2.30095C11.7785 4.22095 11.3061 6.18666 10.9404 8.16761C14.308 7.8019 17.6909 7.8019 21.0585 8.16761Z" fill="#724C1F"/>
+                                                            <path d="M8.16774 10.9409C6.17154 11.3066 4.22107 11.779 2.28583 12.419C2.17916 12.4495 2.08774 12.4495 1.98107 12.4647C1.69154 13.5923 1.52393 14.7809 1.52393 16C1.52393 17.2343 1.69154 18.4076 1.98107 19.5504C2.08774 19.5657 2.17916 19.5504 2.30107 19.5809C4.22107 20.2209 6.18678 20.6933 8.18297 21.059C7.80202 17.6914 7.80202 14.3085 8.16774 10.9409Z" fill="#724C1F"/>
+                                                            <path d="M30.0203 12.4647C29.9136 12.4647 29.8222 12.4495 29.7003 12.419C27.7803 11.779 25.7993 11.3066 23.8184 10.9409C24.1993 14.3085 24.1993 17.6914 23.8184 21.0438C25.7993 20.6781 27.7803 20.2209 29.7003 19.5657C29.8069 19.5352 29.8984 19.5504 30.0203 19.5352C30.2945 18.3923 30.4774 17.219 30.4774 15.9847C30.4774 14.7809 30.3098 13.6076 30.0203 12.4647Z" fill="#724C1F"/>
+                                                            <path d="M10.9404 23.8324C11.3061 25.8286 11.7633 27.7943 12.4185 29.7143C12.449 29.8209 12.4338 29.9124 12.449 30.0343C13.5919 30.3086 14.7652 30.4762 15.9995 30.4762C17.2185 30.4762 18.4071 30.3086 19.5347 30.019C19.55 29.9124 19.55 29.8209 19.5804 29.699C20.2204 27.779 20.6928 25.8133 21.0585 23.8171C19.3823 24 17.6909 24.1371 15.9995 24.1371C14.308 24.1371 12.6166 24.0152 10.9404 23.8324Z" fill="#724C1F"/>
+                                                            <path d="M10.5899 10.5904C10.1328 14.1866 10.1328 17.8133 10.5899 21.4247C14.1861 21.8818 17.8128 21.8818 21.4242 21.4247C21.8814 17.8285 21.8814 14.2018 21.4242 10.5904C17.8128 10.1333 14.1861 10.1333 10.5899 10.5904Z" fill="#724C1F"/>
+                                                          </svg>
+                                                        <p class="feature-title">Visit your branded residence preview page.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td valign="top" width="33%">
+                                            <table class="feature-box" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                <tr>
+                                                    <td align="left">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                                            <path d="M29.3332 28.3334H27.9998V13.3067C27.9998 12.48 27.6265 11.7067 26.9732 11.2L25.3332 9.92004L25.3065 6.65338C25.3065 5.92004 24.7065 5.33338 23.9732 5.33338H19.4265L17.6398 3.94671C16.6798 3.18671 15.3198 3.18671 14.3598 3.94671L5.0265 11.2C4.37317 11.7067 3.99984 12.48 3.99984 13.2934L3.93317 28.3334H2.6665C2.11984 28.3334 1.6665 28.7867 1.6665 29.3334C1.6665 29.88 2.11984 30.3334 2.6665 30.3334H29.3332C29.8798 30.3334 30.3332 29.88 30.3332 29.3334C30.3332 28.7867 29.8798 28.3334 29.3332 28.3334ZM8.6665 17V15C8.6665 14.2667 9.2665 13.6667 9.99984 13.6667H12.6665C13.3998 13.6667 13.9998 14.2667 13.9998 15V17C13.9998 17.7334 13.3998 18.3334 12.6665 18.3334H9.99984C9.2665 18.3334 8.6665 17.7334 8.6665 17ZM19.3332 28.3334H12.6665V24.6667C12.6665 23.56 13.5598 22.6667 14.6665 22.6667H17.3332C18.4398 22.6667 19.3332 23.56 19.3332 24.6667V28.3334ZM23.3332 17C23.3332 17.7334 22.7332 18.3334 21.9998 18.3334H19.3332C18.5998 18.3334 17.9998 17.7334 17.9998 17V15C17.9998 14.2667 18.5998 13.6667 19.3332 13.6667H21.9998C22.7332 13.6667 23.3332 14.2667 23.3332 15V17Z" fill="#724C1F"/>
+                                                        </svg>
+                                                        <p class="feature-title">Review the pictures, property information, and details.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td valign="top" width="33%">
+                                            <table class="feature-box" cellpadding="0" cellspacing="0" border="0" width="100%">
+                                                <tr>
+                                                    <td align="left">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                                            <path d="M21.5865 2.66663H10.4132C5.55984 2.66663 2.6665 5.55996 2.6665 10.4133V21.5733C2.6665 26.44 5.55984 29.3333 10.4132 29.3333H21.5732C26.4265 29.3333 29.3198 26.44 29.3198 21.5866V10.4133C29.3332 5.55996 26.4398 2.66663 21.5865 2.66663ZM22.3732 12.9333L14.8132 20.4933C14.6265 20.68 14.3732 20.7866 14.1065 20.7866C13.8398 20.7866 13.5865 20.68 13.3998 20.4933L9.6265 16.72C9.23984 16.3333 9.23984 15.6933 9.6265 15.3066C10.0132 14.92 10.6532 14.92 11.0398 15.3066L14.1065 18.3733L20.9598 11.52C21.3465 11.1333 21.9865 11.1333 22.3732 11.52C22.7598 11.9066 22.7598 12.5333 22.3732 12.9333Z" fill="#724C1F"/>
+                                                        </svg>
+                                                        <p class="feature-title">Make any necessary updates to your residence profile.</p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <h2 class="no-login">No Login Required!</h2>
+                            <p class="link-instruction">Click on the unique link to access your residence profile:</p>
+                            
+                            <a href="{{deeplink}}" class="cta-button">Preview &amp; Update Residence</a>
+                            
+                            <div class="divider"></div>
+                            
+                            <h2 class="closing-title">We can't wait to showcase your project!</h2>
+                            <p class="closing-text">We're committed to making sure your branded residence shines when BBR goes live, and your updated information will ensure you stand out to buyers worldwide.</p>
+                            
+                            <p class="signature">
+                                Best regards,<br>
+                                The Best Branded Residences Team
+                            </p>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td class="footer">
+                            <p>You are receiving this email because you opted in via our website.</p>
+                            <p>Do you want to know how to change your subscription?<br>
+                            You can <a href="{{unsubscribeLink}}">unsubscribe</a> from newsletters.</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

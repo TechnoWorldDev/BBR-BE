@@ -1,0 +1,7 @@
+export enum MediaUploadStatus {
+  RECEIVED = 'RECEIVED',
+  COMPLETED = 'COMPLETED',
+  IN_PROGRESS = 'IN_PROGRESS',
+  PENDING = 'PENDING',
+  ERROR = 'ERROR',
+}
