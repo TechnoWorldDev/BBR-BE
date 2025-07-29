@@ -46,6 +46,7 @@ export class CreateProductCommandHandler {
       amount: command.amount,
       currency: command.currency,
       interval: command.interval,
+      isPremium: command.isPremium || false,
     };
 
     // 3. Insert u lokalnu bazu

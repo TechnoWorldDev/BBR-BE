@@ -10,6 +10,7 @@ export class ProductResponse {
     public readonly amount: number,
     public readonly currency: string,
     public readonly active: boolean,
-    public readonly interval: string
+    public readonly interval: string,
+    public readonly isPremium: boolean
   ) {}
 }

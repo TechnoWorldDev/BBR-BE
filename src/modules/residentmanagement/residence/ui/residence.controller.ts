@@ -84,7 +84,7 @@ export class ResidenceController {
     const user = req.user as User;
     let loggedDeveloperCompanyId: string[] | undefined = undefined;
 
-    if (user.role?.name?.toLowerCase() === 'developer') {
+    if (user && user.role?.name?.toLowerCase() === 'developer') {
       loggedDeveloperCompanyId = [user.company!.id];
     }
 

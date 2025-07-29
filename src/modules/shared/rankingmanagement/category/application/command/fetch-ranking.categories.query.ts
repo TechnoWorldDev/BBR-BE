@@ -5,6 +5,8 @@ import { RankingCategoryStatus } from '../../domain/ranking-category-status.enum
 export class FetchRankingCategoriesQuery extends BaseFetchQuery {
   status?: RankingCategoryStatus[];
   categoryTypeId?: string[];
+  countryId?: string;
+  cityId?: string;
 
   constructor(
     query?: string,
@@ -13,11 +15,15 @@ export class FetchRankingCategoriesQuery extends BaseFetchQuery {
     sortBy?: string,
     sortOrder?: OrderByDirection,
     status?: RankingCategoryStatus[],
-    categoryTypeId?: string[]
+    categoryTypeId?: string[],
+    countryId?: string,
+    cityId?: string
   ) {
     super(query, page, limit, sortBy, sortOrder);
 
     this.status = status;
     this.categoryTypeId = categoryTypeId;
+    this.countryId = countryId;
+    this.cityId = cityId;
   }
 }

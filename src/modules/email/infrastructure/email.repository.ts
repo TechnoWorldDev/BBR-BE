@@ -31,14 +31,14 @@ export class EmailRepository implements IEmailRepository {
     }
   }
   @LogMethod()
-  async sendInvoice(to: string, subject: string, pdf: string, html: string): Promise<any> {
+  async sendInvoice(to: string, subject: string, pdf: string, html: string, data?: any): Promise<any> {
     try {
       await this.mailerService.sendMail({
         from: this.configService.get<string>('MAILER_FROM'),
         to,
         subject,
         template: 'invoice',
-        context: { pdf, html },
+        context: { pdf, html, ...data },
       });
     } catch (e: any) {
       Logger.error(e);

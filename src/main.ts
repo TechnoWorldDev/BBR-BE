@@ -44,6 +44,8 @@ async function bootstrap() {
       'https://www.bestbrandedresidences.com',
       'https://bestbrandedresidences.com',
       'https://admin.bestbrandedresidences.com',
+      'https://brr-fe-web.vercel.app/',
+      'https://pvd3n7dn-3000.inc1.devtunnels.ms'
     ],
     credentials: true,
   });

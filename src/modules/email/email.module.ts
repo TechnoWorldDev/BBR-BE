@@ -1,8 +1,8 @@
 import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as path from 'path';
+import { CustomHandlebarsAdapter } from './infrastructure/adapters/custom-handlebars.adapter';
 import { SendAcceptedResidenceCommandHandler } from './application/send-accepted-residence.command.handler';
 import { SendApplyForRankingCommandHandler } from './application/send-apply-for-ranking.command.handler';
 import { SendContactConsultationEmailCommandHandler } from './application/send-contact-consultation.handler';
@@ -14,6 +14,7 @@ import { SendOnFormSubmitCommandHandler } from './application/send-on-form-submi
 import { SendOwnershipRequestAcceptedCommandHandler } from './application/send-ownership-request-accepted.command.handler';
 import { SendOwnershipRequestDeclinedCommandHandler } from './application/send-ownership-request-declined.command.handler';
 import { SendOwnershipRequestCommandHandler } from './application/send-ownership-request.command.handler';
+import { SendPaymentConfirmationCommandHandler } from './application/send-payment-confirmation.command.handler';
 import { SendPremiumSubscriptionCommandHandler } from './application/send-premium-subscription.command.handler';
 import { SendRegisterResidenceCommandHandler } from './application/send-register-residence.command.handler';
 import { SendRegisterUnitCommandHandler } from './application/send-register-unit.command.handler';
@@ -66,7 +67,7 @@ import { SendB2BFormCommandHandler } from './application/send-b2b-form.command.h
             'infrastructure',
             'templates'
           ),
-          adapter: new HandlebarsAdapter(),
+          adapter: new CustomHandlebarsAdapter(),
         },
         options: {
           strict: true,
@@ -102,10 +103,11 @@ import { SendB2BFormCommandHandler } from './application/send-b2b-form.command.h
     SendPremiumSubscriptionCommandHandler,
     SendContactUsEmailCommandHandler,
     SendB2BFormCommandHandler,
+    SendPaymentConfirmationCommandHandler,
     EmailJobProcessor,
     EmailQueue,
     EmailHandlerRegistry,
   ],
-  exports: [EmailQueue],
+  exports: [EmailQueue, SendPaymentConfirmationCommandHandler],
 })
 export default class EmailModule {}

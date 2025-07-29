@@ -19,4 +19,10 @@ export abstract class IResidencePositionRequestsRepository {
   ): Promise<{ data: ResidencePositionRequest[]; pagination: PaginationResponse }>;
 
   abstract findById(id: string): Promise<ResidencePositionRequest | undefined>;
+
+  abstract findByResidenceAndCategory(
+    residenceId: string,
+    rankingCategoryId: string,
+    requestedBy: string
+  ): Promise<ResidencePositionRequest | undefined>;
 }

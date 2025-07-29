@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  IsBoolean,
   Max,
   MaxLength,
 } from 'class-validator';
@@ -40,4 +41,8 @@ export class CreateProductRequest {
   @IsOptional()
   @IsEnum(SubscriptionIntervalEnum)
   interval?: SubscriptionIntervalEnum;
+
+  @IsOptional()
+  @IsBoolean()
+  isPremium?: boolean;
 }

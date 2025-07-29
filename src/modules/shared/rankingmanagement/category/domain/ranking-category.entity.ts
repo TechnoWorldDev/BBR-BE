@@ -17,6 +17,7 @@ export class RankingCategory extends Model {
   entityId: string;
   residenceLimitation!: number;
   rankingPrice!: number;
+  stripePriceId?: string;
   featuredImage!: Media;
   featuredImageId!: string;
   status!: RankingCategoryStatus;

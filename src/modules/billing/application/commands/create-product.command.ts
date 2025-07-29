@@ -9,6 +9,7 @@ export class CreateProductCommand {
     public readonly amount: number,
     public readonly currency: string,
     public readonly description?: string,
-    public readonly interval?: SubscriptionIntervalEnum
+    public readonly interval?: SubscriptionIntervalEnum,
+    public readonly isPremium?: boolean
   ) {}
 }

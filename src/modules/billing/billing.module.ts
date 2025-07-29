@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { BillingController } from './ui/billing.controller';
+import { BillingPublicController } from './ui/billing.public.controller';
 import { PaymentMethodRepositoryImpl } from './infrastructure/payment-method.repository';
 import { IPaymentMethodRepository } from './domain/interfaces/payment-method.repository.interface';
 import { FetchAllPaymentMethodsByUserCommandQuery } from './application/query/fetch-all-payment-methods-by-user.command.query';
@@ -10,6 +11,7 @@ import { IStripeCustomerRepository } from './domain/interfaces/stripe-customer.r
 import { StripeCustomerRepositoryImpl } from './infrastructure/stripe-customer.repository';
 import { GenerateCheckoutOneTimeCommandHandler } from './application/handlers/generate-checkout-one-time.command.handler';
 import { FetchAllProductsCommandQuery } from './application/query/fetch-all-products.command.query';
+import { FetchFilteredProductsCommandQuery } from './application/query/fetch-filtered-products.command.query';
 import { IBillingProductRepository } from './domain/interfaces/billing-product.repository.interface';
 import { BillingProductRepositoryImpl } from './infrastructure/billing-product.repository';
 import { CreateProductCommandHandler } from './application/handlers/create-product.command.handler';
@@ -27,13 +29,21 @@ import { FetchAllTransactionsCommandQuery } from './application/query/fetch-all-
 import { ICompanyRepository } from './domain/interfaces/company.repository.interface';
 import { CompanyRepositoryImpl } from './infrastructure/company.repository.impl';
 import { CompanyService } from './application/services/company.service';
-import { IUserRepository } from './domain/interfaces/user.repository.interface';
-import { UserRepositoryImpl } from './infrastructure/user.repository.impl';
 import EmailModule from '../email/email.module';
+import { TwoTierSubscriptionService } from './application/services/two-tier-subscription.service';
+import { TwoTierSubscriptionController } from './ui/two-tier-subscription.controller';
+import { CreateResidenceSubscriptionCommandHandler } from './application/handlers/create-residence-subscription.command.handler';
+import { CreateRankingSubscriptionCommandHandler } from './application/handlers/create-ranking-subscription.command.handler';
+import { IRankingCategoryRepository } from 'src/modules/shared/rankingmanagement/category/domain/ranking-category.repository.interface';
+import { RankingCategoryRepositoryImpl } from 'src/modules/shared/rankingmanagement/category/infrastructure/ranking-category.repository';
+import { IResidenceRepository } from 'src/modules/residentmanagement/residence/domain/residence.repository.interface';
+import { ResidenceRepository } from 'src/modules/residentmanagement/residence/infrastructure/residence.repository';
+import { PasswordEncoder } from 'src/shared/passwordEncoder/password-encoder.util';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  controllers: [BillingController, StripeWebhookController],
-  imports: [EmailModule],
+  controllers: [BillingController, BillingPublicController, StripeWebhookController, TwoTierSubscriptionController],
+  imports: [EmailModule, UserModule],
   providers: [
     {
       provide: IPaymentMethodRepository,
@@ -46,10 +56,6 @@ import EmailModule from '../email/email.module';
     {
       provide: IBillingProductRepository,
       useClass: BillingProductRepositoryImpl,
-    },
-    {
-      provide: IUserRepository,
-      useClass: UserRepositoryImpl,
     },
     {
       provide: ITransactionRepository,
@@ -67,19 +73,32 @@ import EmailModule from '../email/email.module';
       provide: ICompanyRepository,
       useClass: CompanyRepositoryImpl,
     },
+    {
+      provide: IRankingCategoryRepository,
+      useClass: RankingCategoryRepositoryImpl,
+    },
+    {
+      provide: IResidenceRepository,
+      useClass: ResidenceRepository,
+    },
     FetchAllPaymentMethodsByUserCommandQuery,
     FetchAllProductsCommandQuery,
+    FetchFilteredProductsCommandQuery,
     FetchAllTransactionsCommandQuery,
     AddPaymentMethodCommandHandler,
     GenerateCheckoutOneTimeCommandHandler,
     GenerateCheckoutSubscriptionCommandHandler,
     CreateProductCommandHandler,
+    CreateResidenceSubscriptionCommandHandler,
+    CreateRankingSubscriptionCommandHandler,
     OneTimePurchaseService,
     SubscriptionService,
+    TwoTierSubscriptionService,
     StripeService,
     StripeCustomerService,
     CompanyService,
+    PasswordEncoder,
   ],
-  exports: [],
+  exports: [TwoTierSubscriptionService, IBillingProductRepository],
 })
 export class BillingModule {}

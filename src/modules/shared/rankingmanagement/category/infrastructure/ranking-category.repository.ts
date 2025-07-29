@@ -54,6 +54,18 @@ export class RankingCategoryRepositoryImpl implements IRankingCategoryRepository
     return this.resolveEntityForCategory(category);
   }
 
+  async findByIds(ids: string[]): Promise<RankingCategory[]> {
+    if (!ids || ids.length === 0) return [];
+    return await RankingCategory.query()
+      .whereIn('id', ids)
+      .whereNull('deletedAt')
+      .withGraphFetched('[rankingCategoryType, featuredImage, rankingCriteria]');
+  }
+
+  async findByStripePriceId(stripePriceId: string): Promise<RankingCategory | undefined> {
+    return RankingCategory.query().where('stripe_price_id', stripePriceId).first();
+  }
+
   async findResidencesByCategory(
     rankingCategoryId: string,
     query: FetchResidencesByCategoryQuery
@@ -460,6 +472,31 @@ export class RankingCategoryRepositoryImpl implements IRankingCategoryRepository
       .patch({ deletedAt: new Date() })
       .where('id', id)
       .whereNull('deletedAt');
+  }
+
+  // New: Find suggested categories for a specific country or city
+  async findSuggestedCategories({ countryId, cityId }: { countryId?: string; cityId?: string }) {
+    let query = RankingCategory.query()
+      .whereNull('deletedAt')
+      .withGraphFetched('[rankingCategoryType, featuredImage]');
+
+    if (countryId || cityId) {
+      query = query.where((qb) => {
+        if (countryId && cityId) {
+          qb.where((subQb) => {
+            subQb.where('rankingCategoryType:key', '=', 'country').andWhere('entityId', '=', countryId);
+          }).orWhere((subQb) => {
+            subQb.where('rankingCategoryType:key', '=', 'city').andWhere('entityId', '=', cityId);
+          });
+        } else if (countryId) {
+          qb.where('rankingCategoryType:key', '=', 'country').andWhere('entityId', '=', countryId);
+        } else if (cityId) {
+          qb.where('rankingCategoryType:key', '=', 'city').andWhere('entityId', '=', cityId);
+        }
+      });
+    }
+
+    return query;
   }
 
   private async resolveEntityForCategory(

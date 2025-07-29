@@ -28,13 +28,16 @@ export class StripeService {
     return this.stripe.subscriptions.cancel(subscriptionId);
   }
 
-  getEventFromWebhookPayload(signature: string, payload: Buffer) {
+  getEventFromWebhookPayload(payload: Buffer, signature: string): Stripe.Event {
+    console.log('payload', payload);
+    console.log('signature', signature);
     return this.stripe.webhooks.constructEvent(
       payload,
       signature,
       this.configService.get<string>('STRIPE_WEBHOOK_SECRET') || 'not_defined'
     );
   }
+  
 
   createCustomer(params: Stripe.CustomerCreateParams) {
     return this.stripe.customers.create(params);
@@ -95,5 +98,13 @@ export class StripeService {
 
   updateProduct(productId: string, params: Stripe.ProductUpdateParams): Promise<Stripe.Product> {
     return this.stripe.products.update(productId, params);
+  }
+
+  createSubscription(params: Stripe.SubscriptionCreateParams): Promise<Stripe.Subscription> {
+    return this.stripe.subscriptions.create(params);
+  }
+
+  updateSubscription(subscriptionId: string, params: Stripe.SubscriptionUpdateParams): Promise<Stripe.Subscription> {
+    return this.stripe.subscriptions.update(subscriptionId, params);
   }
 }

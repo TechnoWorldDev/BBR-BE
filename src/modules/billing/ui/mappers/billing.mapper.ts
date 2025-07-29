@@ -3,6 +3,7 @@ import { GenerateCheckoutCommand } from '../../application/commands/generate-che
 import { BillingProduct } from '../../domain/billing-product.entity';
 import { GenerateCheckoutOneTimeRequest } from '../requests/generate-checkout-one-time.request';
 import { ProductResponse } from '../responses/product.response';
+import { CreateProductRequest } from '../requests/create-product.request';
 
 export class BillingMapper {
   static toGenerateCheckoutOneTimeCommand(
@@ -34,15 +35,16 @@ export class BillingMapper {
     );
   }
 
-  static toCreateProductCommand(command: CreateProductCommand): CreateProductCommand {
+  static toCreateProductCommand(request: CreateProductRequest): CreateProductCommand {
     return new CreateProductCommand(
-      command.name,
-      command.featureKey,
-      command.type,
-      command.amount,
-      command.currency,
-      command.description,
-      command.interval
+      request.name,
+      request.featureKey,
+      request.type,
+      request.amount,
+      request.currency,
+      request.description,
+      request.interval,
+      request.isPremium
     );
   }
   static toProductResponse(product: BillingProduct): ProductResponse {
@@ -57,7 +59,8 @@ export class BillingMapper {
       product.amount,
       product.currency,
       product.active,
-      product.interval
+      product.interval,
+      product.isPremium
     );
   }
 }

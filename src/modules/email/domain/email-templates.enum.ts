@@ -36,4 +36,5 @@ export enum EmailTemplatesEnum {
   OWNERSHIP_REQUEST = 'ownership-request',
   OWNERSHIP_REQUEST_ACCEPTED = 'ownership-request-accepted',
   OWNERSHIP_REQUEST_DECLINED = 'ownership-request-declined',
+  PAYMENT_CONFIRMATION = 'payment-confirmation',
 }

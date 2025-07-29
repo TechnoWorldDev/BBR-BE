@@ -31,10 +31,16 @@ import { ResidenceController } from './ui/residence.controller';
 import { ResidencePublicController } from './ui/residence.public.controller';
 import { IUserRepository } from './domain/user.repository.interface';
 import { UserRepositoryImpl } from './infrastructure/user.repository.impl';
+import { PublicApplyForRankingController } from './ui/public-apply-for-ranking.controller';
+import { PublicApplyForRankingService } from './services/public-apply-for-ranking.service';
+import { UserModule } from 'src/modules/user/user.module';
+import { BillingModule } from 'src/modules/billing/billing.module';
+import { StripeModule } from 'src/shared/stripe/stripe.module';
+import { ResidencePositionRequestsModule } from '../residence_position_requests/residence-position-requests.module';
 
 @Module({
-  imports: [EmailModule],
-  controllers: [ResidenceController, ResidencePublicController],
+  imports: [EmailModule, UserModule, BillingModule, StripeModule, ResidencePositionRequestsModule],
+  controllers: [ResidenceController, ResidencePublicController, PublicApplyForRankingController],
   providers: [
     {
       provide: IResidenceRepository,
@@ -76,6 +82,7 @@ import { UserRepositoryImpl } from './infrastructure/user.repository.impl';
       provide: IUserRepository,
       useClass: UserRepositoryImpl,
     },
+    PublicApplyForRankingService,
     FindAllResidencesCommandQuery,
     FindAllUnassignedResidencesCommandQuery,
     FindByIdResidenceCommandQuery,

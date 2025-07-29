@@ -103,32 +103,6 @@ export class RankingCategoryMapper {
   }
 
   static toPublicResponse(rankingCategory: RankingCategory): RankingCategoryPublicResponse {
-    return new RankingCategoryPublicResponse(
-      rankingCategory.id,
-      rankingCategory.name,
-      rankingCategory.slug,
-      rankingCategory.title,
-      rankingCategory.description,
-      rankingCategory.rankingCategoryType
-        ? new RankingCategoryTypeResponse(
-            rankingCategory.rankingCategoryType.id,
-            rankingCategory.rankingCategoryType.name,
-            rankingCategory.rankingCategoryType.key
-          )
-        : null,
-      rankingCategory.featuredImage
-        ? new MediaResponse(
-            rankingCategory.featuredImage.id,
-            rankingCategory.featuredImage.originalFileName,
-            rankingCategory.featuredImage.mimeType,
-            rankingCategory.featuredImage.uploadStatus,
-            rankingCategory.featuredImage.size,
-            rankingCategory.featuredImage.securedUrl
-          )
-        : null,
-      rankingCategory.residenceLimitation,
-      rankingCategory.entityId ?? null,
-      rankingCategory.entity ?? null
-    );
+    return RankingCategoryPublicResponse.fromEntity(rankingCategory);
   }
 }

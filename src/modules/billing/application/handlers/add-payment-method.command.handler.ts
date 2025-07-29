@@ -4,7 +4,7 @@ import { IPaymentMethodRepository } from '../../domain/interfaces/payment-method
 import { StripeService } from 'src/shared/stripe/stripe.service';
 import { StripeCustomerService } from '../services/stripe-customer.service';
 import { AddPaymentMethodCommand } from '../commands/add-payment-method.command';
-import { IUserRepository } from '../../domain/interfaces/user.repository.interface';
+import { IUserRepository } from 'src/modules/user/domain/user.repository.interface';
 
 @Injectable()
 export class AddPaymentMethodCommandHandler {

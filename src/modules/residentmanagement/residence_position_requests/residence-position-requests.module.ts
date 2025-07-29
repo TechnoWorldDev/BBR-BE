@@ -13,10 +13,11 @@ import { fetchPositionRequestsCommandQuery } from './application/query/fetch-pos
 import { UpdatePositionRequestStatusCommandHandler } from './application/handler/update-position-request-status.command.handler';
 import EmailModule from 'src/modules/email/email.module';
 import { DeletePositionRequestCommandHandler } from './application/handler/delete-position-request.command.handler';
+import { BillingModule } from 'src/modules/billing/billing.module';
 
 @Module({
   controllers: [ResidencePositionRequestsController],
-  imports: [EmailModule],
+  imports: [EmailModule, BillingModule],
   providers: [
     {
       provide: IUserRepository,
@@ -39,6 +40,6 @@ import { DeletePositionRequestCommandHandler } from './application/handler/delet
     DeletePositionRequestCommandHandler,
     fetchPositionRequestsCommandQuery,
   ],
-  exports: [],
+  exports: [IResidencePositionRequestsRepository],
 })
 export class ResidencePositionRequestsModule {}

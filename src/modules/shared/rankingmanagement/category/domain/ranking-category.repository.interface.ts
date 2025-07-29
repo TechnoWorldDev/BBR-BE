@@ -26,4 +26,10 @@ export abstract class IRankingCategoryRepository {
     id: string,
     data: { rankingCriteriaId: string; weight: number }[]
   ): Promise<void>;
+  abstract findSuggestedCategories(params: {
+    countryId?: string;
+    cityId?: string;
+  }): Promise<RankingCategory[]>;
+  abstract findByIds(ids: string[]): Promise<RankingCategory[]>;
+  abstract findByStripePriceId(stripePriceId: string): Promise<RankingCategory | undefined>;
 }

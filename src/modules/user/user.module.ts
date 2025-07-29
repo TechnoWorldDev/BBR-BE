@@ -73,6 +73,6 @@ import { RoleRepositoryImpl } from '../role/infrastructure/role.repository';
     ConfigService,
     UserMapper,
   ],
-  exports: [SendVerifyEmailCommandHandler],
+  exports: [SendVerifyEmailCommandHandler, IUserRepository],
 })
 export class UserModule {}

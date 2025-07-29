@@ -24,8 +24,9 @@ export class StripeWebhookController {
     let event: Stripe.Event;
 
     try {
+      console.log('signature', signature);
       const payload = req.rawBody;
-      event = this.stripeService.getEventFromWebhookPayload(signature, payload!);
+      event = this.stripeService.getEventFromWebhookPayload(payload as Buffer, signature);
     } catch (err) {
       console.error('Invalid Stripe webhook signature.', err);
       return res.status(HttpStatus.BAD_REQUEST).send(`Webhook Error: ${err.message}`);

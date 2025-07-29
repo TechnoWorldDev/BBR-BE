@@ -13,7 +13,24 @@ export class ResidencePositionRequestsRepositoryImpl
   constructor() {}
 
   async findById(id: string): Promise<ResidencePositionRequest | undefined> {
-    return ResidencePositionRequest.query().findById(id);
+    return await ResidencePositionRequest.query()
+      .findById(id)
+      .withGraphFetched('[residence, rankingCategory, requestedByUser, reviewedByUser]');
+  }
+
+  async findByResidenceAndCategory(
+    residenceId: string,
+    rankingCategoryId: string,
+    requestedBy: string
+  ): Promise<ResidencePositionRequest | undefined> {
+    return await ResidencePositionRequest.query()
+      .where({
+        residenceId,
+        rankingCategoryId,
+        requestedBy,
+      })
+      .whereIn('status', ['NEW', 'PENDING'])
+      .first();
   }
 
   async create(

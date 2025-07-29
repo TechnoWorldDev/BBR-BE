@@ -6,5 +6,5 @@ export abstract class IEmailRepository {
     variables?: Record<string, any>
   ): Promise<any>;
 
-  abstract sendInvoice(to: string, subject: string, pdf: string, html: string): Promise<any>;
+  abstract sendInvoice(to: string, subject: string, pdf: string, html: string, data?: any): Promise<any>;
 }
