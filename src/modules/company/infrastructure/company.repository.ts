@@ -36,6 +36,16 @@ export class CompanyRepository implements ICompanyRepository {
     return company;
   }
 
+  async findByContactPersonEmailAndName(email: string, name: string): Promise<Company | undefined> {
+    const company = await Company.query()
+      .whereNull('deleted_at')
+      .where('contact_person_email', email)
+      .where('name', name)
+      .withGraphFetched('[image, contactPersonAvatar]')
+      .first();
+    return company;
+  }
+
   @LogMethod()
   async findAll(
     fetchQuery: FetchCompaniesQuery

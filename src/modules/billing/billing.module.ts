@@ -19,6 +19,8 @@ import { GenerateCheckoutSubscriptionCommandHandler } from './application/handle
 import { StripeWebhookController } from './ui/stripe-webhook.controller';
 import { OneTimePurchaseService } from './application/services/one-time-purchase.service';
 import { SubscriptionService } from './application/services/subscription.service';
+import { ProcessVisitPaymentHandler } from '../visit-booking/application/handler/process-visit-payment.handler';
+import { ProcessVerificationPaymentHandler } from '../residence-verification/application/handler/process-verification-payment.handler';
 import { TransactionRepositoryImpl } from './infrastructure/transaction.repository';
 import { ITransactionRepository } from './domain/interfaces/transaction.repository.interface';
 import { IEmailRepository } from '../email/domain/email.repository.interface';
@@ -40,10 +42,12 @@ import { IResidenceRepository } from 'src/modules/residentmanagement/residence/d
 import { ResidenceRepository } from 'src/modules/residentmanagement/residence/infrastructure/residence.repository';
 import { PasswordEncoder } from 'src/shared/passwordEncoder/password-encoder.util';
 import { UserModule } from '../user/user.module';
+import { VisitBookingModule } from '../visit-booking/visit-booking.module';
+import { ResidenceVerificationModule } from '../residence-verification/residence-verification.module';
 
 @Module({
   controllers: [BillingController, BillingPublicController, StripeWebhookController, TwoTierSubscriptionController],
-  imports: [EmailModule, UserModule],
+  imports: [EmailModule, UserModule, VisitBookingModule, ResidenceVerificationModule],
   providers: [
     {
       provide: IPaymentMethodRepository,
@@ -93,12 +97,22 @@ import { UserModule } from '../user/user.module';
     CreateRankingSubscriptionCommandHandler,
     OneTimePurchaseService,
     SubscriptionService,
+    ProcessVisitPaymentHandler,
+    ProcessVerificationPaymentHandler,
     TwoTierSubscriptionService,
     StripeService,
     StripeCustomerService,
     CompanyService,
     PasswordEncoder,
   ],
-  exports: [TwoTierSubscriptionService, IBillingProductRepository],
+  exports: [
+    StripeService,
+    StripeCustomerService,
+    OneTimePurchaseService,
+    SubscriptionService,
+    TwoTierSubscriptionService,
+    ProcessVisitPaymentHandler,
+    IBillingProductRepository,
+  ],
 })
 export class BillingModule {}

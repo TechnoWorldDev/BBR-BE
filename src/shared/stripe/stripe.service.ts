@@ -107,4 +107,12 @@ export class StripeService {
   updateSubscription(subscriptionId: string, params: Stripe.SubscriptionUpdateParams): Promise<Stripe.Subscription> {
     return this.stripe.subscriptions.update(subscriptionId, params);
   }
+
+  createPaymentIntent(params: Stripe.PaymentIntentCreateParams): Promise<Stripe.PaymentIntent> {
+    return this.stripe.paymentIntents.create(params);
+  }
+
+  retrievePaymentIntent(paymentIntentId: string): Promise<Stripe.PaymentIntent> {
+    return this.stripe.paymentIntents.retrieve(paymentIntentId);
+  }
 }

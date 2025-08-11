@@ -533,4 +533,59 @@ export class BillingPublicController {
       });
     }
   }
+
+  @Post('/create-payment-intent')
+  @ApiOperation({ summary: 'Create payment intent for residence verification' })
+  @ApiResponse({
+    status: 201,
+    description: 'Payment intent created successfully',
+  })
+  @ApiResponse({
+    status: 400,
+    description: 'Bad request - validation error',
+  })
+  async createPaymentIntent(
+    @Body() request: { amount: number; currency: string; metadata?: any },
+    @Res() res: Response
+  ): Promise<void> {
+    try {
+      const { amount, currency = 'usd', metadata = {} } = request;
+
+      if (!amount || amount <= 0) {
+        res.status(400).json({
+          success: false,
+          message: 'Invalid amount provided',
+        });
+        return;
+      }
+
+      // Create payment intent with Stripe
+      const paymentIntent = await this.stripeService.createPaymentIntent({
+        amount: Math.round(amount * 100), // Convert to cents
+        currency: currency.toLowerCase(),
+        metadata: {
+          ...metadata,
+          type: 'residence_verification',
+          createdAt: new Date().toISOString(),
+        },
+        automatic_payment_methods: {
+          enabled: true,
+        },
+      });
+
+      res.status(201).json({
+        success: true,
+        clientSecret: paymentIntent.client_secret,
+        paymentIntentId: paymentIntent.id,
+        amount: paymentIntent.amount,
+        currency: paymentIntent.currency,
+      });
+    } catch (error) {
+      console.error('Error creating payment intent:', error);
+      res.status(500).json({
+        success: false,
+        message: error.message || 'Failed to create payment intent',
+      });
+    }
+  }
 }

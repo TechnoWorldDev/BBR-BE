@@ -46,6 +46,9 @@ import { OpenAiModule } from './shared/openai/openai.module';
 import { MatchmakingModule } from './modules/matchmaking/matchmaking.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ResidencePositionRequestsModule } from './modules/residentmanagement/residence_position_requests/residence-position-requests.module';
+import { MarketingSolutionsModule } from './modules/marketing-solutions/marketing-solutions.module';
+import { VisitBookingModule } from './modules/visit-booking/visit-booking.module';
+import { ResidenceVerificationModule } from './modules/residence-verification/residence-verification.module';
 
 @Module({
   imports: [
@@ -106,6 +109,9 @@ import { ResidencePositionRequestsModule } from './modules/residentmanagement/re
     OpenAiModule,
     MatchmakingModule,
     ResidencePositionRequestsModule,
+    MarketingSolutionsModule,
+    VisitBookingModule,
+    ResidenceVerificationModule,
   ],
   providers: [],
 })

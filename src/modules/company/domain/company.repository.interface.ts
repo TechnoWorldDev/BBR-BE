@@ -7,6 +7,7 @@ export abstract class ICompanyRepository {
   abstract update(id: string, company: any): Promise<any>;
   abstract delete(id: string): Promise<any>;
   abstract findById(id: string): Promise<any>;
+  abstract findByContactPersonEmailAndName(email: string, name: string): Promise<any>;
   abstract findAll(
     fetchQuery: FetchCompaniesQuery
   ): Promise<{ data: Company[]; pagination: PaginationResponse }>;
